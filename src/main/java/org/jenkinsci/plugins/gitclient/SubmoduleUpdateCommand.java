@@ -49,4 +49,12 @@ public interface SubmoduleUpdateCommand extends GitCommand {
      * @return a {@link org.jenkinsci.plugins.gitclient.SubmoduleUpdateCommand} object.
      */
     SubmoduleUpdateCommand timeout(Integer timeout);
+
+    /**
+     * If set true, submodule updates will have access to git credentials
+     *
+     * @param useCredentials if true, credentials will be passed to submodule updates
+     * @return a {@link org.jenkinsci.plugins.gitclient.SubmoduleUpdateCommand} object.
+     */
+    SubmoduleUpdateCommand useCredentials(boolean useCredentials);
 }

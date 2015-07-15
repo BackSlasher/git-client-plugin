@@ -827,6 +827,7 @@ public class CliGitAPIImpl extends LegacyCompatibleGitAPIImpl {
             String  ref                            = null;
             Map<String, String> submodBranch   = new HashMap<String, String>();
             public Integer timeout;
+            boolean useCredentials                 = false;
 
             public SubmoduleUpdateCommand recursive(boolean recursive) {
                 this.recursive = recursive;
@@ -852,6 +853,12 @@ public class CliGitAPIImpl extends LegacyCompatibleGitAPIImpl {
                 this.timeout = timeout;
                 return this;
             }
+
+            public SubmoduleUpdateCommand useCredentials(boolean useCredentials) {
+                this.useCredentials = useCredentials;
+                return this;
+            }
+
 
             /**
              * @throws GitException if executing the Git command fails
@@ -880,7 +887,11 @@ public class CliGitAPIImpl extends LegacyCompatibleGitAPIImpl {
                         args.add("--reference", ref);
                 }
 
-                launchCommandIn(args, workspace, environment, timeout);
+                if (useCredentials)
+                    //TODO passing empty url - need to fix this
+                    launchCommandWithCredentials(args,workspace,defaultCredentials,new URIish(),timeout);
+                else
+                    launchCommandIn(args, workspace, environment, timeout);
             }
         };
     }

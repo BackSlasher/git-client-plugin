@@ -3589,6 +3589,10 @@ public abstract class GitAPITestCase extends TestCase {
         assertTrue("ssh.exe not found", w.cgit().getSSHExecutable().exists());
     }
 
+    public void test_submodule_credentials() throws Exception {
+        // TODO complete
+    }
+
     /**
      * Returns the prefix for the remote branches while querying them.
      * @return remote branch pregix, for example, "remotes/"
